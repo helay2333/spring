@@ -11,9 +11,6 @@ public class Test {
     public static void main(String[] args) throws ClassNotFoundException {
         GreenApplicationContext context = new GreenApplicationContext(AppConfig.class);
         UserService userService = (UserService) context.getBean("userService");
-        UserService userService1 = (UserService) context.getBean("userService");
-        System.out.println(userService);
-        System.out.println(userService1);
         userService.test();
     }
 }

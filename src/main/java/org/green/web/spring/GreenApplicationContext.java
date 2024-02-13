@@ -1,7 +1,9 @@
 package org.green.web.spring;
 
 import javax.print.DocFlavor;
+import java.beans.Introspector;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.HashMap;
@@ -50,9 +52,15 @@ public class GreenApplicationContext {
                     try {
                         Class<?> clazz = classLoader.loadClass(absolutePath);
                         if(clazz.isAnnotationPresent(Component.class)){
-                            System.out.println(clazz);
+
                             Component componentAnnotation = clazz.getAnnotation(Component.class);
                             String beanName = componentAnnotation.value();
+                            if("".equals(beanName)){
+                                //生成默认名字
+                                beanName = Introspector.decapitalize(clazz.getName());
+                                String[] arr = beanName.split("\\.");
+                                beanName = arr[arr.length - 1];
+                            }
                             BeanDefinition beanDefinition = new BeanDefinition();
                             beanDefinition.setType(clazz);
                             //要知道其是单例还是原型-->通过scope
@@ -80,6 +88,11 @@ public class GreenApplicationContext {
         BeanDefinition beanDefinition = beanDefinitionMap.get(name);
         if(beanDefinition.getScope().equals("singleton")){
             Object singletonBean = singletonMap.get(name);
+            if(singletonBean == null){
+                singletonBean = createBean(name, beanDefinition);
+                singletonMap.put(name, beanDefinition);
+
+            }
             return singletonBean;
         }else{
             //原型
@@ -92,6 +105,12 @@ public class GreenApplicationContext {
         Object instance = null;
         try {
             instance = clazz.getConstructor().newInstance();
+            for(Field field : clazz.getDeclaredFields()){
+                if(field.isAnnotationPresent(Autowired.class)){
+                    field.setAccessible(true);
+                    field.set(instance, getBean(field.getName()));
+                }
+            }
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
