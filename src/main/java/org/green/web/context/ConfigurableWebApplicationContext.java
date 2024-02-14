@@ -6,9 +6,13 @@ import javax.servlet.ServletContext;
 /**
  * @author zzzy0
  */
-public interface ConfigurableWebApplicationContext extends WebApplicationContext{
+public interface ConfigurableWebApplicationContext extends WebApplicationContext {
+
     void setServletContext(ServletContext servletContext);
+
     void setServletConfig(ServletConfig servletConfig);
+
     ServletContext getServletContext();
+
     ServletConfig getServletConfig();
 }

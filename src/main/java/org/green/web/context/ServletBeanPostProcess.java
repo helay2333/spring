@@ -1,7 +1,8 @@
 package org.green.web.context;
 
-import org.green.web.spring.BeanPostProcessor;
+
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -33,6 +34,6 @@ public class ServletBeanPostProcess implements BeanPostProcessor {
         if(bean != null && bean instanceof ServletConfigAware){
             ((ServletConfigAware)bean).setServletConfig(this.servletConfig);
         }
-        return null;
+        return bean;
     }
 }

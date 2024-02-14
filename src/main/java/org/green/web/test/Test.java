@@ -1,5 +1,6 @@
 package org.green.web.test;
 
+import org.green.web.mvc.Service;
 import org.green.web.spring.GreenApplicationContext;
 import org.green.web.test.service.UserService;
 
@@ -10,7 +11,8 @@ import org.green.web.test.service.UserService;
 public class Test {
     public static void main(String[] args) throws ClassNotFoundException {
         GreenApplicationContext context = new GreenApplicationContext(AppConfig.class);
-        UserService userService = (UserService) context.getBean("userService");
-        userService.test();
+//        UserService userService = (UserService) context.getBean("userService");
+//        userService.test();
+//        Service service = context.getBean();
     }
 }
