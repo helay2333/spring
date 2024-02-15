@@ -9,10 +9,10 @@ import org.green.web.test.service.UserService;
  * @date 2024-02-13 14:22
  */
 public class Test {
-    public static void main(String[] args) throws ClassNotFoundException {
-        GreenApplicationContext context = new GreenApplicationContext(AppConfig.class);
+//    public static void main(String[] args) throws ClassNotFoundException {
+//        GreenApplicationContext context = new GreenApplicationContext(AppConfig.class);
 //        UserService userService = (UserService) context.getBean("userService");
 //        userService.test();
 //        Service service = context.getBean();
-    }
+//    }
 }
