@@ -1,6 +1,7 @@
 package org.green.web;
 
 import org.green.web.context.WebApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,12 @@ public class DispatcherServlet extends BaseHttpServlet {
     public DispatcherServlet(WebApplicationContext webApplicationContext) {
         super(webApplicationContext);
     }
+    // 组件初始化
+    @Override
+    protected void onRefresh(ApplicationContext webApplicationContext) {
 
+
+    }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("请求分发");

@@ -7,4 +7,5 @@ import org.springframework.context.ApplicationContext;
  * @date 2024-02-13 00:45
  */
 public interface WebApplicationContext extends ApplicationContext {
+    public static final String ROOT_NAME =  WebApplicationContext.class.getName() + "ROOT";
 }
